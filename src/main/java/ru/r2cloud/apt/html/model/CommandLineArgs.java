@@ -13,6 +13,9 @@ public class CommandLineArgs {
 	@Parameter(names = "--include-arch", description = "Comma separated list of archs to include into the search. Example: amd64,armhf", required = true)
 	private List<String> includeArch = new ArrayList<>();
 
+	@Parameter(names = "--include-component", description = "Comma separated list of components to include into the search. Example: stable,unstable,main", required = true)
+	private List<String> includeComponent = new ArrayList<>();
+
 	@Parameter(names = "--include-codename", description = "Comma separated list of codenames to include into the search. Example: stretch,bionic", required = true)
 	private List<String> includeCodename = new ArrayList<>();
 
@@ -22,8 +25,27 @@ public class CommandLineArgs {
 	@Parameter(names = "--output-dir", description = "Output directory for the generated web site. For example, target/generated", required = true)
 	private String outputDir;
 
+	@Parameter(names = "--timeout", description = "Timeout while querying APT repository in milliseconds. Example: 10000")
+	private int timeout = 10000;
+
 	@Parameter(names = "--help", help = true)
 	private boolean help;
+	
+	public int getTimeout() {
+		return timeout;
+	}
+	
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
+	}
+
+	public List<String> getIncludeComponent() {
+		return includeComponent;
+	}
+
+	public void setIncludeComponent(List<String> includeComponent) {
+		this.includeComponent = includeComponent;
+	}
 
 	public List<String> getIncludeCodename() {
 		return includeCodename;
