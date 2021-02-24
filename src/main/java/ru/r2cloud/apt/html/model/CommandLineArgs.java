@@ -58,7 +58,7 @@ public class CommandLineArgs {
 	public List<String> getIncludePackage() {
 		return includePackage;
 	}
-
+	
 	public void setIncludePackage(List<String> includePackage) {
 		this.includePackage = includePackage;
 	}

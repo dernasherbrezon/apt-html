@@ -63,9 +63,10 @@ public class Main {
 		RequestConfig config = RequestConfig.custom().setConnectTimeout(args.getTimeout()).setConnectionRequestTimeout(args.getTimeout()).build();
 		CloseableHttpClient httpclient = HttpClientBuilder.create().setUserAgent(USER_AGENT).setDefaultRequestConfig(config).build();
 
-		//FIXME handle arch=all. I.e. it should be included into any other arch
+		// FIXME handle arch=all. I.e. it should be included into any other arch
 		Set<Column> uniqueColumns = new HashSet<>();
 		Map<String, PackageDetails> details = new HashMap<>();
+		Set<String> indexedPackageInclude = new HashSet<>(args.getIncludePackage());
 
 		for (Codename codename : convertCodename(args.getIncludeCodename())) {
 			for (String component : args.getIncludeComponent()) {
@@ -83,6 +84,9 @@ public class Main {
 					uniqueColumns.add(curColumn);
 
 					for (ControlFile cur : curPackages.getContents().values()) {
+						if (!indexedPackageInclude.contains(cur.getPackageName())) {
+							continue;
+						}
 						PackageDetails curDetails = details.get(cur.getPackageName());
 						if (curDetails == null) {
 							curDetails = new PackageDetails();

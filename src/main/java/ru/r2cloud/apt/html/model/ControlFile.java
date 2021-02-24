@@ -16,11 +16,11 @@ public class ControlFile {
 	public String getHomepage() {
 		return homepage;
 	}
-	
+
 	public void setHomepage(String homepage) {
 		this.homepage = homepage;
 	}
-	
+
 	public Map<String, String> getPayload() {
 		return payload;
 	}
@@ -64,24 +64,25 @@ public class ControlFile {
 		}
 		String[] lines = str.split("\\r?\\n");
 		for (String cur : lines) {
-			String[] parts = cur.split(":");
-			if (parts.length != 2) {
+			int index = cur.indexOf(':');
+			if (index == -1) {
 				continue;
 			}
-			String value = parts[1].trim();
-			if (parts[0].equalsIgnoreCase("Package")) {
+			String name = cur.substring(0, index);
+			String value = cur.substring(index + 1).trim();
+			if (name.equalsIgnoreCase("Package")) {
 				setPackageName(value);
 				continue;
 			}
-			if (parts[0].equalsIgnoreCase("Homepage")) {
+			if (name.equalsIgnoreCase("Homepage")) {
 				setHomepage(value);
 				continue;
 			}
-			if (parts[0].equalsIgnoreCase("Version")) {
+			if (name.equalsIgnoreCase("Version")) {
 				setVersion(value);
 				continue;
 			}
-			if (parts[0].equalsIgnoreCase("Architecture")) {
+			if (name.equalsIgnoreCase("Architecture")) {
 				setArch(Architecture.valueOf(value));
 				continue;
 			}
