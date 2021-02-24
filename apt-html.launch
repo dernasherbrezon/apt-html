@@ -14,7 +14,7 @@
     <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ru.r2cloud.apt.html.Main"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="apt-html"/>
-    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="--url http://s3.amazonaws.com/r2cloud --include-arch armhf,amd64 --include-component main --include-codename stretch,bionic,buster,focal --include-package librtlsdr0,librtlsdr-dev,librtlsdr0-dbgsym,libiio,plutosdr,r2cloud-jdk,r2cloud-ui,rtl-sdr,wxtoimg --output-dir src/main/resources/"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="--url http://s3.amazonaws.com/r2cloud --include-arch armhf,amd64 --include-component main --include-codename stretch,bionic,buster,focal --include-package librtlsdr0,librtlsdr-dev,librtlsdr0-dbgsym,libiio,plutosdr,r2cloud-jdk,r2cloud-ui,rtl-sdr,wxtoimg,r2cloud --output-dir src/main/resources/"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="apt-html"/>
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
 </launchConfiguration>

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.zip.GZIPInputStream;
@@ -63,7 +64,6 @@ public class Main {
 		RequestConfig config = RequestConfig.custom().setConnectTimeout(args.getTimeout()).setConnectionRequestTimeout(args.getTimeout()).build();
 		CloseableHttpClient httpclient = HttpClientBuilder.create().setUserAgent(USER_AGENT).setDefaultRequestConfig(config).build();
 
-		// FIXME handle arch=all. I.e. it should be included into any other arch
 		Set<Column> uniqueColumns = new HashSet<>();
 		Map<String, PackageDetails> details = new HashMap<>();
 		Set<String> indexedPackageInclude = new HashSet<>(args.getIncludePackage());
@@ -71,20 +71,20 @@ public class Main {
 		for (Codename codename : convertCodename(args.getIncludeCodename())) {
 			for (String component : args.getIncludeComponent()) {
 				for (Architecture arch : convert(args.getIncludeArch())) {
-					String path = "dists/" + codename + "/" + component + "/binary-" + arch + "/Packages";
-					Packages curPackages = load(httpclient, args.getUrl() + "/" + path + ".gz");
-					if (curPackages == null) {
-						curPackages = load(httpclient, args.getUrl() + "/" + path);
-					}
+					Packages curPackages = loadByArch(httpclient, arch, codename, component, args);
 					if (curPackages == null) {
 						continue;
 					}
-
 					Column curColumn = new Column(codename, arch);
-					uniqueColumns.add(curColumn);
 
+					boolean atleastOneAdded = false;
 					for (ControlFile cur : curPackages.getContents().values()) {
 						if (!indexedPackageInclude.contains(cur.getPackageName())) {
+							continue;
+						}
+						// ignore wildcard archs. they will be separately processed below
+						// arch=all can be uploaded to all and several other archs
+						if (cur.getArch().isWildcard()) {
 							continue;
 						}
 						PackageDetails curDetails = details.get(cur.getPackageName());
@@ -95,6 +95,36 @@ public class Main {
 							details.put(cur.getPackageName(), curDetails);
 						}
 						curDetails.getVersions().put(curColumn, new PackageVersion(null, cur.getVersion()));
+						atleastOneAdded = true;
+					}
+
+					if (atleastOneAdded) {
+						uniqueColumns.add(curColumn);
+					}
+				}
+			}
+		}
+
+		Map<Codename, List<Architecture>> grouped = groupByCodename(uniqueColumns);
+		for (Entry<Codename, List<Architecture>> curEntry : grouped.entrySet()) {
+			for (String component : args.getIncludeComponent()) {
+				Packages curPackages = loadByArch(httpclient, Architecture.all, curEntry.getKey(), component, args);
+				if (curPackages == null) {
+					continue;
+				}
+				for (ControlFile cur : curPackages.getContents().values()) {
+					if (!indexedPackageInclude.contains(cur.getPackageName())) {
+						continue;
+					}
+					PackageDetails curDetails = details.get(cur.getPackageName());
+					if (curDetails == null) {
+						curDetails = new PackageDetails();
+						curDetails.setName(cur.getPackageName());
+						curDetails.setHomepage(cur.getHomepage());
+						details.put(cur.getPackageName(), curDetails);
+					}
+					for (Architecture curArch : curEntry.getValue()) {
+						curDetails.getVersions().put(new Column(curEntry.getKey(), curArch), new PackageVersion(null, cur.getVersion()));
 					}
 				}
 			}
@@ -141,6 +171,19 @@ public class Main {
 		}
 	}
 
+	private static Map<Codename, List<Architecture>> groupByCodename(Set<Column> uniqueColumns) {
+		Map<Codename, List<Architecture>> result = new HashMap<>();
+		for (Column cur : uniqueColumns) {
+			List<Architecture> archs = result.get(cur.getCodename());
+			if (archs == null) {
+				archs = new ArrayList<>();
+				result.put(cur.getCodename(), archs);
+			}
+			archs.add(cur.getArch());
+		}
+		return result;
+	}
+
 	private static PackageVersion findMax(Collection<PackageVersion> versions) {
 		PackageVersion result = null;
 		for (PackageVersion cur : versions) {
@@ -170,6 +213,15 @@ public class Main {
 			result.add(Architecture.valueOf(cur.trim()));
 		}
 		return result;
+	}
+
+	private static Packages loadByArch(CloseableHttpClient httpclient, Architecture arch, Codename codename, String component, CommandLineArgs args) {
+		String path = "dists/" + codename + "/" + component + "/binary-" + arch + "/Packages";
+		Packages curPackages = load(httpclient, args.getUrl() + "/" + path + ".gz");
+		if (curPackages == null) {
+			curPackages = load(httpclient, args.getUrl() + "/" + path);
+		}
+		return curPackages;
 	}
 
 	private static Packages load(CloseableHttpClient httpclient, String url) {
