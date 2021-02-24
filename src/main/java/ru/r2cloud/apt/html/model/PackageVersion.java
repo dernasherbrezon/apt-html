@@ -21,6 +21,9 @@ public class PackageVersion {
 	}
 
 	private void setupVersions(String version) {
+		if (version == null) {
+			return;
+		}
 		int majorIndex = version.indexOf('.');
 		if (majorIndex == -1) {
 			major = Long.valueOf(version);

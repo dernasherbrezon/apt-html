@@ -8,6 +8,7 @@ public class PackageVersionTest {
 
 	@Test
 	public void testDifferentVersions() {
+		assertPackageVersion(0, 0, 0, 0, new PackageVersion(null, null));
 		assertPackageVersion(1, 2, 0, 0, new PackageVersion(null, "1.2"));
 		assertPackageVersion(1, 2, 3, 0, new PackageVersion(null, "1.2.3"));
 		assertPackageVersion(1, 2, 3, 1, new PackageVersion(null, "1.2.3-1"));

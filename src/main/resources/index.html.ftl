@@ -29,34 +29,24 @@
           	<thead>
           		<tr>
           			<td></td>
-          			<td>stretch armhf</td>
-          			<td>stretch arm64</td>
-          			<td>bionic amd64</td>
-          			<td>focal amd64</td>
+          			<#list columns as column>
+	          			<td><strong>${column.codename}</strong> ${column.arch}</td>
+          			</#list>
           		</tr>
           	</thead>
           	<tbody>
-          		<tr>
-          			<td>r2cloud</td>
-          			<td class="table-success">202112345</td>
-          			<td class="table-success">202112345</td>
-          			<td class="table-success">202112345</td>
-          			<td class="table-success">202112345</td>
-          		</tr>
-          		<tr>
-          			<td>librtlsdr</td>
-          			<td class="table-success">0.6.4</td>
-          			<td class="table-success">0.6.4</td>
-          			<td class="table-warning">0.6.0</td>
-          			<td class="table-warning">0.6.0</td>
-          		</tr>
-          		<tr>
-          			<td>plutosdr</td>
-          			<td class="table-danger"></td>
-          			<td class="table-danger"></td>
-          			<td class="table-success">1.0.1</td>
-          			<td class="table-success">1.0.1</td>
-          		</tr>
+          		<#list rows as row>
+	          		<tr>
+	          			<#if row.homepage??>
+		          			<td><a href="${row.homepage}">${row.name}</a></td>
+		          		<#else>
+		          			<td>${row.name}</td>
+		          		</#if>
+		          		<#list row.mappedToColumns as version>
+	          				<td class="table-${version.color}">${version.version}</td>
+	          			</#list>
+	          		</tr>
+          		</#list>
           	</tbody>
           </table>
         </div>
