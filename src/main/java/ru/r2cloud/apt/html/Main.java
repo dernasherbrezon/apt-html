@@ -164,6 +164,7 @@ public class Main {
 		Map<String, Object> data = new HashMap<>();
 		data.put("columns", columnsSorted);
 		data.put("rows", sortedPackages);
+		data.put("url", args.getUrl());
 		try (Writer w = new BufferedWriter(new FileWriter(new File(outputDir, "index.html")))) {
 			fTemplate.process(data, w);
 		} catch (Exception e) {

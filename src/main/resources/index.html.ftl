@@ -59,7 +59,7 @@
       <div class="py-5">
       	<pre><code>sudo apt-get install dirmngr lsb-release
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A5A70917
-sudo bash -c "echo \"deb http://s3.amazonaws.com/r2cloud $(lsb_release --codename --short) main\" > /etc/apt/sources.list.d/r2cloud.list"
+sudo bash -c "echo \"deb ${url} $(lsb_release --codename --short) main\" > /etc/apt/sources.list.d/r2cloud.list"
 sudo apt-get update</code></pre>
       </div>
 
