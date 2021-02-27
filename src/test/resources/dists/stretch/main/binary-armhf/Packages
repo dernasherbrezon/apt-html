@@ -1,0 +1,66 @@
+Package: rtl-sdr
+Version: 0.6.5-1~stretch
+License: unknown
+Vendor: none
+Architecture: armhf
+Maintainer: A. Maitland Bottoms <bottoms@debian.org>
+Installed-Size: 180
+Depends: librtlsdr0 (= 0.6.5-1~stretch), libc6 (>= 2.15), libusb-1.0-0 (>= 2:1.0.8)
+Section: comm
+Priority: optional
+Homepage: http://sdr.osmocom.org/trac/wiki/rtl-sdr
+Filename: pool/main/r/rtl-sdr/rtl-sdr_0.6.5-1~stretch_armhf.deb
+Size: 53652
+SHA1: 8ef5f863bec6dae2c733ec4b470105fdfbbe87ab
+SHA256: 08679c30e35e513f73204c60ac1465f187a1f96b5008bf15ad7a021c4b0d3c42
+MD5sum: 1e41ed440b158aa3e016027e963b98de
+Description: Software defined radio receiver for Realtek RTL2832U (tools)
+ rtl-sdr is a software defined radio (SDR) receiver software for certain
+ low-cost DVB-T/DAB(+) USB dongles based on the Realtek RTL2832U chip.
+ .
+ This package contains a set of command line utilities:
+ * rtl_adsb: a simple ADS-B decoder for RTL2832 based DVB-T receivers
+ * rtl_eeprom: an EEPROM programming tool for RTL2832 based DVB-T receivers
+ * rtl_fm: a narrow band FM demodulator for RTL2832 based DVB-T receivers
+ * rtl_sdr: an I/Q recorder for RTL2832 based DVB-T receivers
+ * rtl_tcp: an I/Q spectrum server for RTL2832 based DVB-T receivers
+ * rtl_test: a benchmark tool for RTL2832 based DVB-T receivers
+ 
+Package: plutosdr
+Version: 1.0.2-1~stretch
+License: unknown
+Vendor: none
+Architecture: armhf
+Maintainer: Andrey Rodionov <info@r2cloud.ru>
+Installed-Size: 25
+Depends: libc6 (>= 2.4), libiio
+Section: admin
+Priority: optional
+Homepage: https://github.com/dernasherbrezon/plutosdr
+Filename: pool/main/p/plutosdr/plutosdr_1.0.2-1~stretch_armhf.deb
+Size: 7090
+SHA1: 94bd3cfbb5be35f06d8ece7f2a85c15a7c4f0b6b
+SHA256: dff1f191760e99f21041c16c2e768e95b64bea956c2e5f0ba745ffdb1dac5d97
+MD5sum: 568f473c88eea20f7200bfc6be576034
+Description: Configures low bandwidth mode for plutosdr
+ This application configures plutosdr to run in low bandwidth
+ mode: 520khz. This is suitable for narrowband telemetry and
+ radio amateur protocols.
+ 
+Package: r2cloud-jdk
+Version: 11.0.10-1
+License: unknown
+Vendor: none
+Architecture: armhf
+Maintainer: Andrey Rodionov <info@r2cloud.ru>
+Installed-Size: 
+Section: embedded
+Priority: standard
+Homepage: https://github.com/dernasherbrezon/r2cloud-jdk
+Filename: pool/main/r/r2cloud-jdk/r2cloud-jdk_11.0.10-1_armhf.deb
+Size: 42766156
+SHA1: 5de1caa1b09d9f9a18a096aace3ddb721270f7ee
+SHA256: 6ed01c6da274ec896d91c47446500870b07dccc1b346c922aae3fac61805e8ea
+MD5sum: d4c45e90b5b2e24a7394ba628438067a
+Description: r2cloud jdk
+ Custom JDK build for r2cloud

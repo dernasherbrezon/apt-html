@@ -1,0 +1,18 @@
+Package: r2cloud
+Version: 20210226205612
+License: unknown
+Vendor: none
+Architecture: all
+Maintainer: Andrey Rodionov <info@r2cloud.ru>
+Installed-Size: 
+Depends: coreutils (>=8.26), libhyperic-sigar-java (>=1.6.4), libxft2 (>=2.3.2), nginx-light (>=1.10.3), r2cloud-jdk (>=20201129115210), r2cloud-ui (>=1513613469), rtl-sdr (>=0.6.4), sox (>=14.4.1), wget, wxtoimg (>=2.11.2)
+Section: embedded
+Priority: standard
+Homepage: https://github.com/dernasherbrezon/r2cloud
+Filename: pool/stretch/r/r2/r2cloud-20210226205612.deb
+Size: 282354
+SHA1: 4d4e4c0020d8528e3b51237e0d59d96a512784b8
+SHA256: 696d77776fde913be334ec464ad0fcd13e3034353f3c8522919e0d6c2e88461c
+MD5sum: bee0f7f270065807568672326fa87314
+Description: Decode satellite signals on Raspberry PI
+ This is a server-side component automatically recording satellite signals
