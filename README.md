@@ -1,4 +1,4 @@
-## apt-html [![Build Status](https://travis-ci.com/dernasherbrezon/apt-html.svg?branch=master)](https://travis-ci.com/dernasherbrezon/apt-html) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dernasherbrezon_apt-html&metric=alert_status)](https://sonarcloud.io/dashboard?id=dernasherbrezon_apt-html)
+## apt-html [![Build Status](https://travis-ci.com/dernasherbrezon/apt-html.svg?branch=main)](https://travis-ci.com/dernasherbrezon/apt-html) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dernasherbrezon_apt-html&metric=alert_status)](https://sonarcloud.io/dashboard?id=dernasherbrezon_apt-html)
 
 Render nice html page showing APT repository packages and versions.
 
