@@ -21,6 +21,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
@@ -39,6 +41,7 @@ import ru.r2cloud.apt.html.model.Packages;
 
 public class Main {
 
+	private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 	private static final String USER_AGENT = "aptHtml/1.0";
 
 	public static void main(String[] argv) throws Exception {
@@ -47,7 +50,7 @@ public class Main {
 		try {
 			parser.parse(argv);
 		} catch (ParameterException e) {
-			System.out.println(e.getMessage());
+			LOG.error(e.getMessage());
 			parser.usage();
 			System.exit(-1);
 		}
@@ -168,7 +171,8 @@ public class Main {
 		try (Writer w = new BufferedWriter(new FileWriter(new File(outputDir, "index.html")))) {
 			fTemplate.process(data, w);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("unable to process data", e);
+			System.exit(-1);
 		}
 	}
 
