@@ -1,4 +1,4 @@
-## apt-html
+## apt-html [![Build Status](https://travis-ci.com/dernasherbrezon/apt-html.svg?branch=master)](https://travis-ci.com/dernasherbrezon/apt-html) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ru.r2cloud%3Aapt-html&metric=alert_status)](https://sonarcloud.io/dashboard?id=ru.r2cloud%3Aapt-html)
 
 Render nice html page showing APT repository packages and versions.
 
